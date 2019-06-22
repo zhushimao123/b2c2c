@@ -45,6 +45,15 @@ class LoginController extends Controller
     {
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx48451c201710dbcd&secret=f583f90f3aed8ec33ae6dd30eceebe5f&code='.$code.'&grant_type=authorization_code';
         $json_data = file_get_contents($url);
-        var_dump($json_data);
+        $arr_data = json_decode($json_data,true);
+        $this-> accesstoken($arr_data['access_token']);
+    }
+    //通过access——token获取用户信息
+    public function accesstoken($token)
+    {
+        $url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token.'&openid=wx48451c201710dbcd&lang=zh_CN';
+        $json_data = file_get_contents($url);
+        $arr_data = json_decode($json_data,true);
+        echo '<pre>';print_r($arr_data);echo "<pre>";
     }
 }
