@@ -46,6 +46,7 @@ class LoginController extends Controller
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx48451c201710dbcd&secret=f583f90f3aed8ec33ae6dd30eceebe5f&code='.$code.'&grant_type=authorization_code';
         $json_data = file_get_contents($url);
         $arr_data = json_decode($json_data,true);
+        var_dump($arr_data);die;
         $this-> accesstoken($arr_data['access_token']);
     }
     //通过access——token获取用户信息
