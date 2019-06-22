@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,18 @@ class LoginController extends Controller
     //获取code
     public function getcode()
     {
-        var_dump($_GET);
+        //code五分钟过期
+        $key = 'code001';
+        $code = $_GET['code'];
+        $redis_key = Redis::get($key);
+        if(!$redis_key){
+            Redis::set($key,$code);
+            Redis::expire($key,3600);
+        }else{
+            return $redis_key;
+        }
+        var_dump($redis_key);
+
+
     }
 }
