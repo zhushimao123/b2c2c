@@ -22,6 +22,7 @@ class LoginController extends Controller
         //urlEncode 数据加密
        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx48451c201710dbcd&redirect_uri='.urlEncode('http://test.mneddx.com/code').'&response_type=code&scope=SCOPE&state=STATE#wechat_redirect';
     }
+    //获取code
     public function getcode()
     {
         var_dump($_GET);
